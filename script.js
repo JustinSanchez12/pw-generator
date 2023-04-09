@@ -18,12 +18,16 @@ function generatePassword() {
 
    //Validate types of characters
    if(!includeLowercase && !includeUppercase && !includeNumbers && !includeSpecialchars){
-    alert("Error, invalid character types.\nPlease include at least one lower case, upper case, number, and special character.");
+    alert("Error, invalid character types.\nPlease include at least one lower case, upper case, number, and special type of character.");
+    return "";
    }
 
    //Generate a random password
    let passwordChars = [];
    const specialChars = "!\"@#$%^&*()-+,./:;<=>?[\\]_'{|}~";
+   const lowerCase = "abcdefghijklmnopqrstuvwxyz";
+   const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+   const numbers = "1234567890";
 
    //TODO handle other character types
 
@@ -31,7 +35,45 @@ function generatePassword() {
     passwordChars = passwordChars.concat(specialChars.split(""));
    }
 
+   if(includeLowercase){
+    passwordChars = passwordChars.concat(lowerCase.split(""));
+   }
+
+   if(includeUppercase){
+    passwordChars = passwordChars.concat(upperCase.split(""));
+   }
+
+   if(includeNumbers){
+    passwordChars = passwordChars.concat(numbers.split(""));
+   }
+
+   let results = "";
+   for (i=0; i < passwordLength; i++) {
+    let randomIndex = Math.floor(Math.random() * passwordChars.length);
+    let randomChars = passwordChars[randomIndex];
+    results += randomChars;
+   }
+
+   for(i=0; i < passwordLength; i++){
+    let randomIndex = Math.floor(Math.random() * lowerCase.length);
+    let randomChars = passwordChars[randomIndex]
+    results += randomChars;
+   }
+
+   for(i=0; i < passwordLength; i++){
+    let randomIndex = Math.floor(Math.random() * numbers.length);
+    let randomChars = passwordChars[randomIndex]
+    results += randomChars;
+   }
+
+   for(i=0; i < passwordLength; i++){
+    let randomIndex = Math.floor(Math.random() * upperCase.length);
+    let randomChars = passwordChars[randomIndex]
+    results += randomChars;
+   }
+
    //Return generated password
+   return results;
 }
 
 // Write password to the #password input
